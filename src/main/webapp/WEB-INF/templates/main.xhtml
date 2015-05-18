@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- TODO: <f:view locale="#{ctx.locale}" -->
+<f:view contentType="text/html"
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core">
+<html>
+<h:head>
+	<ui:include src="/WEB-INF/templates/includes/head.xhtml" />
+</h:head>
+<h:body>
+	
+  <ui:insert name="body" />
+	
+  <ui:include src="/WEB-INF/templates/includes/bottom_scripts.xhtml" />
+
+</h:body>
+
+</html>
+</f:view>

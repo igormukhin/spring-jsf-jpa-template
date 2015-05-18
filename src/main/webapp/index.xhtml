@@ -1,21 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<f:view contentType="text/html"
-	xmlns="http://www.w3.org/1999/xhtml" 
-	xmlns:ui="http://java.sun.com/jsf/facelets" 
-	xmlns:h="http://java.sun.com/jsf/html" 
-	xmlns:f="http://java.sun.com/jsf/core"
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/templates/main.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:p="http://primefaces.org/ui">
-<html>
+    xmlns:p="http://primefaces.org/ui">    
 
-<h:head>
-  
-  <!-- For Bootstrap responsive grid -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
-  
-</h:head>
-
-<h:body>
+<ui:define name="body">
 
 <h:form id="form">
 
@@ -64,7 +56,6 @@
   </div>
 
 </h:form>
-</h:body>
 
-</html>
-</f:view>
+</ui:define>
+</ui:composition>
