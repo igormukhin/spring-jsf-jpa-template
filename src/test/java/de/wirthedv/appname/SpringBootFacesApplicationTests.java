@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.acme.sample;
+package de.wirthedv.appname;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

@@ -1,2 +1,15 @@
 management:
   context-path: /sysinfo
+  
+security:
+  # Extends SpringBootWebSecurityConfiguration.DEFAULT_IGNORED
+  ignored:
+    - /css/**
+    - /js/**   
+    - /images/**
+    - /**/favicon.ico
+    - /resources/css/**
+    - /resources/js/**   
+    - /resources/images/**
+    - /javax.faces.resource/**
+    - /public/**
