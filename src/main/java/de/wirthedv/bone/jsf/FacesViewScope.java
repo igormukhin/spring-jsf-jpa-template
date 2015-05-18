@@ -1,4 +1,4 @@
-package org.acme.sample.jsf;
+package de.wirthedv.bone.jsf;
 
 import java.util.Map;
 

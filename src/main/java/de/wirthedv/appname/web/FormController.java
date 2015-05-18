@@ -1,4 +1,4 @@
-package org.acme.sample.web;
+package de.wirthedv.appname.web;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;

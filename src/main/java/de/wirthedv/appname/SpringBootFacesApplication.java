@@ -1,4 +1,4 @@
-package org.acme.sample;
+package de.wirthedv.appname;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -10,7 +10,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.HandlesTypes;
 
-import org.acme.sample.jsf.FacesViewScope;
 import org.apache.catalina.Context;
 import org.primefaces.util.Constants;
 import org.springframework.beans.factory.config.CustomScopeConfigurer;
@@ -28,6 +27,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
 import com.sun.faces.config.FacesInitializer;
+
+import de.wirthedv.bone.jsf.FacesViewScope;
 
 @Configuration
 @ComponentScan

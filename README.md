@@ -1,7 +1,5 @@
-Spring Boot With JSF Sample
+Application Template: Spring Boot, Security, JSF, EclipseLink
 =================================================================
-
-* Shows how to configure JSF 2.2.x with Spring Boot 1.2.x on Servlet API 3.x
 
 ### Running
 

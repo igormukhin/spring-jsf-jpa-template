@@ -9,8 +9,8 @@
         <relativePath />
     </parent>   
 
-	<groupId>de.igormukhin.samples</groupId>
-	<artifactId>spring-boot-org.acme.sample-jsf</artifactId>
+	<groupId>de.wirthedv.templates</groupId>
+	<artifactId>spring-jsf-jpa-template</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
     
 	<packaging>war</packaging>

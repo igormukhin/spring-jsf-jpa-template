@@ -1,12 +1,13 @@
-package org.acme.sample.web;
+package de.wirthedv.appname.web;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.acme.sample.jsf.FacesViewScope;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import de.wirthedv.bone.jsf.FacesViewScope;
 
 @Component("formBean")
 @Scope(FacesViewScope.NAME)
