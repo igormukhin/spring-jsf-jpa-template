@@ -10,6 +10,10 @@
 	<ui:include src="/WEB-INF/templates/includes/head.xhtml" />
 </h:head>
 <h:body>
+
+  <ui:fragment rendered="#{empty templateHideNavbar or not templateHideNavbar}">
+    <ui:include src="/WEB-INF/templates/includes/navbar.xhtml" />
+  </ui:fragment>
 	
   <ui:insert name="body" />
 	

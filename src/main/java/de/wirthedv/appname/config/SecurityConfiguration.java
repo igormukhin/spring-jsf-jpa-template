@@ -25,9 +25,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                     .loginPage("/public/login.jsf")
                     .loginProcessingUrl("/login")
-                    // .failureUrl("/login?error")
+                    .failureUrl("/public/login.jsf?event=loginFailure")
                     .defaultSuccessUrl("/", true) // optional
-                .permitAll();
+            .and()
+                .logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/public/login.jsf?event=logout");
     }
 
     @Override

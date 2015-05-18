@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.faces.application.ProjectStage;
+import javax.faces.application.ViewHandler;
 import javax.servlet.ServletContainerInitializer;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,16 +16,17 @@ import org.primefaces.util.Constants;
 import org.springframework.beans.factory.config.CustomScopeConfigurer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.ServletContextInitializer;
 import org.springframework.boot.context.embedded.tomcat.TomcatContextCustomizer;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
+import org.springframework.boot.context.web.NonEmbeddedServletContainerFactory;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 
 import com.sun.faces.config.FacesInitializer;
 
@@ -57,9 +59,15 @@ public class SpringBootFacesApplication extends SpringBootServletInitializer {
 	    return new ServletContextInitializer() {
             @Override
             public void onStartup(ServletContext sc) throws ServletException {
+                // Mojarra JSF
+                // TODO: set correct stage
+                sc.setInitParameter(ProjectStage.PROJECT_STAGE_PARAM_NAME, ProjectStage.Development.name());
+                // constant found from WebConfiguration.BooleanWebContextInitParameter.FaceletsSkipComments 
+                sc.setInitParameter(ViewHandler.FACELETS_SKIP_COMMENTS_PARAM_NAME, "true");
+                
+                // PrimeFaces
                 sc.setInitParameter(Constants.ContextParams.THEME, "bootstrap");
                 sc.setInitParameter(Constants.ContextParams.FONT_AWESOME, "true");
-                sc.setInitParameter(ProjectStage.PROJECT_STAGE_PARAM_NAME, ProjectStage.Development.name());
             }
 	    };
 	}
@@ -69,7 +77,8 @@ public class SpringBootFacesApplication extends SpringBootServletInitializer {
 	 * It is lazy, so it will not be created when running in a standalone Tomcat
 	 */
     @Bean
-    @Lazy
+    //@Lazy
+    @ConditionalOnMissingBean(NonEmbeddedServletContainerFactory.class)
     public EmbeddedServletContainerFactory embeddedServletContainerFactory() {
         TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
         

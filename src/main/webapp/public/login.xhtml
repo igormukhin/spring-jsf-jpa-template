@@ -5,7 +5,15 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:p="http://primefaces.org/ui">    
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:jsf="http://xmlns.jcp.org/jsf">
+    
+<f:metadata>
+    <f:viewParam name="event" value="#{loginBean.event}" required="false" />
+    <f:viewAction action="#{loginBean.init}" />
+</f:metadata>
+
+<ui:param name="templateHideNavbar" value="true" />   
 
 <ui:define name="body">
 
@@ -14,10 +22,19 @@
   <div class="container">
     <form name="loginForm" action="/login" method="POST" class="form-signin">
       <h2 class="form-signin-heading">Please sign in</h2>
+      
+      <div class="alert alert-danger" role="alert" jsf:rendered="#{not empty loginBean.errorMessage}">
+        <h:outputText value="#{loginBean.errorMessage}" />
+      </div>
+      
       <label for="inputUsername" class="sr-only">Username</label>
-      <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required="required" autofocus="autofocus" autocomplete="off" />
+      <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" 
+          required="required" autofocus="autofocus" autocomplete="off" />
+      
       <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="required" autocomplete="off" />
+      <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" 
+          required="required" autocomplete="off" />
+      
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
   </div>

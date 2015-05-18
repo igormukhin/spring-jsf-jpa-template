@@ -13,3 +13,4 @@ security:
     - /resources/images/**
     - /javax.faces.resource/**
     - /public/**
+  basic.enabled: false

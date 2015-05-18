@@ -18,8 +18,15 @@
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="expires" content="-1" />
 
+    <!-- Implicitly include jquery always -->
+    <h:outputScript library="primefaces" name="jquery/jquery.js"/>
+
     <!-- TODO: internalize -->
     <!-- For Bootstrap responsive grid -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <!-- TODO: Navbar required only http://getbootstrap.com/components/#requires-javascript-plugin
+               Remove all the other plugin, otherwise they will conflict with jquery-ui
+    -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 </ui:composition>

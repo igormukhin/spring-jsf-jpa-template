@@ -4,24 +4,24 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
-@Component("formController")
-@Scope("request")
-public class FormController {
+import de.wirthedv.bone.spring.RequestScopedComponent;
+
+@RequestScopedComponent("indexBean")
+public class IndexBean {
+    
 	@Autowired
-	private FormBean formBean;
+	private IndexView indexView;
 	
 	public void submit() {
-	    formBean.getSubmittedValues().add(formBean.getField());
+	    indexView.getSubmittedValues().add(indexView.getField());
 	    
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Value submitted."));
 	}
 	
 	public void reset() {
-	    formBean.getSubmittedValues().clear();
-	    formBean.setField(null);
+	    indexView.getSubmittedValues().clear();
+	    indexView.setField(null);
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Form reset."));
 	}

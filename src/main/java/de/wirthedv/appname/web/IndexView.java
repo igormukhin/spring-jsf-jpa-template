@@ -4,14 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import de.wirthedv.bone.jsf.ViewScopedComponent;
 
-import de.wirthedv.bone.jsf.FacesViewScope;
-
-@Component("formBean")
-@Scope(FacesViewScope.NAME)
-public class FormBean implements Serializable {
+@ViewScopedComponent("indexView")
+public class IndexView implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
