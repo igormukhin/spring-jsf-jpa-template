@@ -19,8 +19,8 @@
       <p:messages globalOnly="true" />
     </div>
     
-    <div>
-      <h:dataTable value="#{citiesBean.cities}" var="city" styleClass="table table-striped">
+    <div class="table-responsive">
+      <h:dataTable value="#{citiesBean.cities}" var="city" styleClass="table table-striped table-hover">
         <h:column>
           <f:facet name="header">City</f:facet>
           <h:outputText value="#{city.name}" />
