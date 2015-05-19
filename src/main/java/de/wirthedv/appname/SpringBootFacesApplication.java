@@ -74,10 +74,8 @@ public class SpringBootFacesApplication extends SpringBootServletInitializer {
     
 	/**
 	 * This bean is only needed when running with embedded Tomcat.
-	 * It is lazy, so it will not be created when running in a standalone Tomcat
 	 */
     @Bean
-    //@Lazy
     @ConditionalOnMissingBean(NonEmbeddedServletContainerFactory.class)
     public EmbeddedServletContainerFactory embeddedServletContainerFactory() {
         TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();

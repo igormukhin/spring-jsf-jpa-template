@@ -18,23 +18,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .csrf().disable()
-            .authorizeRequests()
-                .anyRequest().fullyAuthenticated()
-            .and()
-                .formLogin()
-                    .loginPage("/public/login.jsf")
-                    .loginProcessingUrl("/login")
-                    .failureUrl("/public/login.jsf?event=loginFailure")
-                    .defaultSuccessUrl("/", true) // optional
-            .and()
-                .logout()
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/public/login.jsf?event=logout");
+            //.sessionManagement()
+            .headers()
+                .cacheControl() // ? disables browser cache
+                //.frameOptions()
+            .and().csrf()
+                .disable()
+            .formLogin()
+                .loginPage("/public/login.jsf")
+                .loginProcessingUrl("/login")
+                .failureUrl("/public/login.jsf?event=loginFailure")
+                .defaultSuccessUrl("/", true) // optional
+            .and().logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/public/login.jsf?event=logout")
+            .and().authorizeRequests()
+                .anyRequest().fullyAuthenticated();
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //auth.userDetailsService(this.userDetailsServiceImpl).passwordEncoder(this.bCryptPasswordEncoder());
+        
         auth.inMemoryAuthentication()
             .withUser("admin").password("admin").roles("ADMIN", "USER")
             .and().withUser("user").password("user").roles("USER");
