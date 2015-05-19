@@ -1,6 +1,7 @@
 package de.wirthedv.appname.repo;
 
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.emptyIterable;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
@@ -15,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import de.wirthedv.appname.AppProfiles;
 import de.wirthedv.appname.SpringBootFacesApplication;
+import de.wirthedv.appname.domain.QCity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SpringBootFacesApplication.class)
@@ -29,5 +31,10 @@ public class CityRepoTests {
     @Test
     public void testFindAll() {
         assertThat(cityRepo.findAll(), not(empty()));
+    }
+
+    @Test
+    public void testFindSomeWithQueryDsl() {
+        assertThat(cityRepo.findAll(QCity.city.country.eq("Australia")), not(emptyIterable()));
     }
 }
