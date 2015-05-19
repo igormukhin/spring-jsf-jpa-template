@@ -1,6 +1,7 @@
 package de.wirthedv.appname.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -19,7 +20,8 @@ import de.wirthedv.appname.AppProfiles;
 
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+@ConditionalOnWebApplication
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     
     public static final String PREAUTH_USER_HEADER = "Preauth-User";
 

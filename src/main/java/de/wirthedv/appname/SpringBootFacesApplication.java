@@ -17,6 +17,7 @@ import org.springframework.beans.factory.config.CustomScopeConfigurer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.ServletContextInitializer;
@@ -77,6 +78,7 @@ public class SpringBootFacesApplication extends SpringBootServletInitializer {
 	 */
     @Bean
     @ConditionalOnMissingBean(NonEmbeddedServletContainerFactory.class)
+    @ConditionalOnWebApplication
     public EmbeddedServletContainerFactory embeddedServletContainerFactory() {
         TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
         
