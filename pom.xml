@@ -25,6 +25,8 @@
         <jsf-mojarra.version>2.2.11</jsf-mojarra.version>
         <primefaces.version>5.2</primefaces.version>
         
+        <rewrite.version>2.0.12.Final</rewrite.version>
+        
         <eclipselink.version>2.6.0</eclipselink.version>
         <querydsl.version>3.6.3</querydsl.version>
         
@@ -104,6 +106,17 @@
 			<artifactId>javax.faces</artifactId>
 			<version>${jsf-mojarra.version}</version>
 		</dependency>
+    
+        <dependency>
+           <groupId>org.ocpsoft.rewrite</groupId>
+           <artifactId>rewrite-servlet</artifactId>
+           <version>${rewrite.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ocpsoft.logging</groupId>
+            <artifactId>logging-adapter-slf4j</artifactId>
+            <version>1.0.3.Final</version>
+        </dependency>
 
         <dependency>
             <groupId>com.h2database</groupId>
@@ -266,7 +279,7 @@
                                    </pluginExecutionFilter>
                                    <action>
                                        <execute>
-                                          <runOnIncremental>true</runOnIncremental>
+                                          <runOnIncremental>false</runOnIncremental>
                                           <runOnConfiguration>true</runOnConfiguration>
                                        </execute>
                                    </action>

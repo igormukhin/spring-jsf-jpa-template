@@ -12,9 +12,9 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.HandlesTypes;
 
 import org.apache.catalina.Context;
+import org.ocpsoft.rewrite.annotation.config.AnnotationConfigProvider;
 import org.primefaces.util.Constants;
 import org.springframework.beans.factory.config.CustomScopeConfigurer;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -39,12 +39,20 @@ import de.wirthedv.bone.jsf.FacesViewScope;
 public class SpringBootFacesApplication extends SpringBootServletInitializer {
     
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(SpringBootFacesApplication.class, args);
+        SpringApplicationBuilder application = new SpringApplicationBuilder(SpringBootFacesApplication.class);
+        customize(application);
+        application.run(args);
     }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(SpringBootFacesApplication.class);
+        application.sources(SpringBootFacesApplication.class);
+        customize(application);
+        return application;
+    }
+    
+    private static void customize(SpringApplicationBuilder application) {
+        application.showBanner(false);
     }
     
 	@Bean
@@ -60,11 +68,19 @@ public class SpringBootFacesApplication extends SpringBootServletInitializer {
 	    return new ServletContextInitializer() {
             @Override
             public void onStartup(ServletContext sc) throws ServletException {
+                // OCPsoft Rewrite
+                // We do not scan packages (as it doesn't work on embedded Tomcat)
+                // See RewriteConfigurationProvider.class on how the rules are obtained
+                sc.setInitParameter(AnnotationConfigProvider.CONFIG_BASE_PACKAGES, "none");
+                
+                
                 // Mojarra JSF
                 // TODO: set correct stage
                 sc.setInitParameter(ProjectStage.PROJECT_STAGE_PARAM_NAME, ProjectStage.Development.name());
                 // constant found from WebConfiguration.BooleanWebContextInitParameter.FaceletsSkipComments 
                 sc.setInitParameter(ViewHandler.FACELETS_SKIP_COMMENTS_PARAM_NAME, "true");
+                // disables *.xhtml mapping for we will use it to pipe the Faces requests through MVC
+                sc.setInitParameter("javax.faces.DISABLE_FACESSERVLET_TO_XHTML", "true");
                 
                 // PrimeFaces
                 sc.setInitParameter(Constants.ContextParams.THEME, "bootstrap");
@@ -85,12 +101,13 @@ public class SpringBootFacesApplication extends SpringBootServletInitializer {
         tomcat.addContextCustomizers(new TomcatContextCustomizer() {
             @Override
             public void customize(Context context) {
+                // register Rewrite
+                context.addServletContainerInitializer(new RewriteInitializer(),
+                        getServletContainerInitializerHandlesTypes(RewriteInitializer.class));
+                
                 // register FacesInitializer
                 context.addServletContainerInitializer(new FacesInitializer(),
                         getServletContainerInitializerHandlesTypes(FacesInitializer.class));
-                
-                // add configuration from web.xml
-                context.addWelcomeFile("index.jsf");
                 
                 // register additional mime-types that Spring Boot doesn't register
                 context.addMimeMapping("eot", "application/vnd.ms-fontobject");
@@ -101,6 +118,23 @@ public class SpringBootFacesApplication extends SpringBootServletInitializer {
         
         return tomcat;
     }
+    
+    /*
+    private void addSciBeforeAll(Context context, ServletContainerInitializer sci, Set<Class<?>> classes) {
+        Field field = ReflectionUtils.findField(context.getClass(), "initializers");
+        field.setAccessible(true);
+        try {
+            @SuppressWarnings({ "rawtypes", "unchecked" })
+            Map<ServletContainerInitializer, Set<Class<?>>> mapOrig = (LinkedHashMap) field.get(context);
+            Map<ServletContainerInitializer, Set<Class<?>>> mapUpdated = new LinkedHashMap<>();
+            mapUpdated.put(sci, classes);
+            mapUpdated.putAll(mapOrig);
+            field.set(context, mapUpdated);
+        } catch (IllegalAccessException e) {
+            throw Throwables.propagate(e);
+        }
+    }
+    */
     
     @SuppressWarnings("rawtypes")
     private Set<Class<?>> getServletContainerInitializerHandlesTypes(Class<? extends ServletContainerInitializer> sciClass) {

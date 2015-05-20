@@ -21,7 +21,6 @@ public class IndexBean {
 	
 	public void reset() {
 	    indexView.getSubmittedValues().clear();
-	    indexView.setField(null);
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Form reset."));
 	}

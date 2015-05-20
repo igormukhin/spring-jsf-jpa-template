@@ -3,10 +3,10 @@ package de.wirthedv.appname.web;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.util.UrlPathHelper;
 
 import de.wirthedv.bone.spring.AntPathMatcherUtils;
 import de.wirthedv.bone.spring.RequestScopedComponent;
+import de.wirthedv.bone.spring.RequestUtils;
 
 @RequestScopedComponent("navbarBean")
 public class NavbarBean {
@@ -27,7 +27,7 @@ public class NavbarBean {
     }
 
     private String resolveActiveMenuItem() {
-        if (pathMatches("/;/index.jsf")) {
+        if (pathMatches("/;/index.*")) {
             return "home";
         } else if (pathMatches("/cities/**")) {
             return "cities";
@@ -37,17 +37,11 @@ public class NavbarBean {
     }
     
     private boolean pathMatches(String pathPattern) {
-        String path = getRequestPath();
-        return AntPathMatcherUtils.matches(pathPattern, path);
+        if (requestPath == null) {
+            requestPath = RequestUtils.getOriginatingRequestPath(request);
+        }
+        
+        return AntPathMatcherUtils.matches(pathPattern, requestPath);
     }
     
-    private String getRequestPath() {
-        if (requestPath == null) {
-            UrlPathHelper pathHelper = new UrlPathHelper();
-            String uri = pathHelper.getOriginatingRequestUri(request);
-            String contextPath = pathHelper.getOriginatingContextPath(request);
-            requestPath = uri.substring(contextPath.length());
-        }
-        return requestPath;
-    }    
 }

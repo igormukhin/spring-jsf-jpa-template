@@ -14,7 +14,13 @@ public class CitiesBean {
     @Autowired
     private CityRepo cityRepo;
     
+    private List<City> cities;
+    
     public List<City> getCities() {
-        return cityRepo.findAll();
+        if (cities == null) {
+            cities = cityRepo.findAll();
+        }
+        
+        return cities;
     }
 }

@@ -50,14 +50,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and().csrf()
                 .disable()
             .formLogin()
-                .loginPage("/public/login.jsf")
+                .loginPage("/public/login.xhtml")
                 .loginProcessingUrl("/login")
-                .failureUrl("/public/login.jsf?event=loginFailure")
+                .failureUrl("/public/login.xhtml?event=loginFailure")
                 .defaultSuccessUrl("/", true) // optional
                 .permitAll()
             .and().logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/public/login.jsf?event=logout")
+                .logoutSuccessUrl("/public/login.xhtml?event=logout")
                 .permitAll()
             .and().authorizeRequests()
                 .anyRequest().fullyAuthenticated();

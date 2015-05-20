@@ -50,7 +50,7 @@
       <div class="col-md-6">
         <p:panel header="Submitted values saved in view scope">
           <p:dataList value="#{indexView.submittedValues}" var="value" type="ordered">
-            #{value}
+            <h:outputText value="#{value}" />
           </p:dataList>
         </p:panel>
       </div>
