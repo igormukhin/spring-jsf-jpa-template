@@ -10,7 +10,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,8 +19,10 @@ import de.wirthedv.appname.domain.QCity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SpringBootFacesApplication.class)
+// TODO: This test should not start embedded Tomcat
 @IntegrationTest
-@DirtiesContext
+// TODO: with @DirtiesContext it fails as tries to execute schema.sql for every method
+//@DirtiesContext
 @ActiveProfiles(AppProfiles.TEST)
 public class CityRepoTests {
     
