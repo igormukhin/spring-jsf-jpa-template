@@ -8,6 +8,10 @@
 	<application>
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 	</application>
+  
+    <lifecycle>
+        <phase-listener>de.wirthedv.bone.jsf.SpringViewLocalePhaseListener</phase-listener>
+    </lifecycle>
 
 </faces-config>
 
