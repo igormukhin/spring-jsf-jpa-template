@@ -1,6 +1,8 @@
 Application Template: Spring Boot, Security, JSF, EclipseLink
 =================================================================
 
+STATUS: UNFINISHED !!!
+
 ### Running
 
 This setup can run in all possible ways:
@@ -20,3 +22,4 @@ This setup can run in all possible ways:
 * How to include Twitter Bootstrap CSS for responsive layout
 * Spring Boot Actuator is added under /sysinfo path (try for example /sysinfo/metrics)
 * How to write simple http tests
+* ... much more
