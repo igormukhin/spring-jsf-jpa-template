@@ -1,7 +1,7 @@
 Application Template: Spring Boot, Security, JSF, EclipseLink
 =================================================================
 
-STATUS: UNFINISHED !!!
+STATUS: WORKS BUT UNFINISHED !!!
 
 ### Running
 
@@ -23,3 +23,19 @@ This setup can run in all possible ways:
 * Spring Boot Actuator is added under /sysinfo path (try for example /sysinfo/metrics)
 * How to write simple http tests
 * ... much more
+
+
+### TODO
+* jsf messages throught spring
+* securityutils, messageutils
+* mvn test (qeurydsl fails, conflict with eclipse resources)
+* status messages
+* security: SwitchUserFilter
+* security: log username, actual username
+* tomcat logs through slf4j
+* primefaces theme customization
+* why standalone starts in 6 secs
+* audit user actions for tracking view scope failures
+* lock to jsf-view (for required action like updating passwords)
+* ?AuthenticationManagerConfiguration: Using default security
+* jpa not to scan classes
